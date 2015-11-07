@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_ELearningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Email" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Assistant">
+    <Key>
+      <PropertyRef Name="AssistantID" />
+    </Key>
+    <Property Name="AssistantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AssistantToCourse">
+    <Key>
+      <PropertyRef Name="CourseID" />
+      <PropertyRef Name="AssistantID" />
+    </Key>
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="AssistantID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ThreadID" Type="int" />
+    <Property Name="Content" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="AreChapterSequential" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CourseChapter">
+    <Key>
+      <PropertyRef Name="ChapterNO" />
+    </Key>
+    <Property Name="ChapterNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="ChapterContent" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="CourseResource">
+    <Key>
+      <PropertyRef Name="ResourceID" />
+    </Key>
+    <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="ChapterNO" Type="int" />
+    <Property Name="FileResource" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="GradedHomework">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="HomeworkID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="HomeworkID" Type="int" Nullable="false" />
+    <Property Name="Grade" Type="int" />
+  </EntityType>
+  <EntityType Name="Homework">
+    <Key>
+      <PropertyRef Name="HomeworkID" />
+    </Key>
+    <Property Name="HomeworkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="ChapterNO" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsMandatory" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="Data" Type="date" />
+    <Property Name="Body" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="CardNO" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="StudentToCourse">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentToTest">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="TestID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="TestID" Type="int" Nullable="false" />
+    <Property Name="AttemptsRemaining" Type="int" />
+    <Property Name="LastGrade" Type="int" />
+    <Property Name="MaxGrade" Type="int" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Email" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="TestID" />
+    </Key>
+    <Property Name="TestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="ChapterNO" Type="int" />
+    <Property Name="IsMandatory" Type="nvarchar" MaxLength="10" />
+    <Property Name="AllocatedTime" Type="time" Precision="7" />
+    <Property Name="NoOfAttempts" Type="int" />
+    <Property Name="Deadline" Type="date" />
+    <Property Name="Structure" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Thread">
+    <Key>
+      <PropertyRef Name="ThreadID" />
+    </Key>
+    <Property Name="ThreadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TopicID" Type="int" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="DescriptionT" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="TopicID" />
+    </Key>
+    <Property Name="TopicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+  </EntityType>
+  <Association Name="FK_AssistantToCourse_Assistant">
+    <End Role="Assistant" Type="Self.Assistant" Multiplicity="1" />
+    <End Role="AssistantToCourse" Type="Self.AssistantToCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Assistant">
+        <PropertyRef Name="AssistantID" />
+      </Principal>
+      <Dependent Role="AssistantToCourse">
+        <PropertyRef Name="AssistantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssistantToCourse_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="AssistantToCourse" Type="Self.AssistantToCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="AssistantToCourse">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Thread">
+    <End Role="Thread" Type="Self.Thread" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Thread">
+        <PropertyRef Name="ThreadID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ThreadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseChapter_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CourseChapter" Type="Self.CourseChapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CourseChapter">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseResource_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CourseResource" Type="Self.CourseResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CourseResource">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseResource_CourseChapter">
+    <End Role="CourseChapter" Type="Self.CourseChapter" Multiplicity="0..1" />
+    <End Role="CourseResource" Type="Self.CourseResource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseChapter">
+        <PropertyRef Name="ChapterNO" />
+      </Principal>
+      <Dependent Role="CourseResource">
+        <PropertyRef Name="ChapterNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradedHomework_Homework">
+    <End Role="Homework" Type="Self.Homework" Multiplicity="1" />
+    <End Role="GradedHomework" Type="Self.GradedHomework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homework">
+        <PropertyRef Name="HomeworkID" />
+      </Principal>
+      <Dependent Role="GradedHomework">
+        <PropertyRef Name="HomeworkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradedHomework_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="GradedHomework" Type="Self.GradedHomework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="GradedHomework">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Homework_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Homework_CourseChapter">
+    <End Role="CourseChapter" Type="Self.CourseChapter" Multiplicity="0..1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseChapter">
+        <PropertyRef Name="ChapterNO" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="ChapterNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentToCourse_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentToCourse" Type="Self.StudentToCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="StudentToCourse">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentToCourse_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentToCourse" Type="Self.StudentToCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentToCourse">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentToTest_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentToTest" Type="Self.StudentToTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentToTest">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentToTest_Test">
+    <End Role="Test" Type="Self.Test" Multiplicity="1" />
+    <End Role="StudentToTest" Type="Self.StudentToTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="TestID" />
+      </Principal>
+      <Dependent Role="StudentToTest">
+        <PropertyRef Name="TestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Test" Type="Self.Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_CourseChapter">
+    <End Role="CourseChapter" Type="Self.CourseChapter" Multiplicity="0..1" />
+    <End Role="Test" Type="Self.Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseChapter">
+        <PropertyRef Name="ChapterNO" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="ChapterNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Thread_Topic">
+    <End Role="Topic" Type="Self.Topic" Multiplicity="0..1" />
+    <End Role="Thread" Type="Self.Thread" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="TopicID" />
+      </Principal>
+      <Dependent Role="Thread">
+        <PropertyRef Name="TopicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Topic_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Topic">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_ELearningModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Assistant" EntityType="Self.Assistant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssistantToCourse" EntityType="Self.AssistantToCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseChapter" EntityType="Self.CourseChapter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseResource" EntityType="Self.CourseResource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GradedHomework" EntityType="Self.GradedHomework" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Homework" EntityType="Self.Homework" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentToCourse" EntityType="Self.StudentToCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentToTest" EntityType="Self.StudentToTest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Thread" EntityType="Self.Thread" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AssistantToCourse_Assistant" Association="Self.FK_AssistantToCourse_Assistant">
+      <End Role="Assistant" EntitySet="Assistant" />
+      <End Role="AssistantToCourse" EntitySet="AssistantToCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssistantToCourse_Course" Association="Self.FK_AssistantToCourse_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="AssistantToCourse" EntitySet="AssistantToCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Thread" Association="Self.FK_Comment_Thread">
+      <End Role="Thread" EntitySet="Thread" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Teacher" Association="Self.FK_Course_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseChapter_Course" Association="Self.FK_CourseChapter_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseChapter" EntitySet="CourseChapter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseResource_Course" Association="Self.FK_CourseResource_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseResource" EntitySet="CourseResource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseResource_CourseChapter" Association="Self.FK_CourseResource_CourseChapter">
+      <End Role="CourseChapter" EntitySet="CourseChapter" />
+      <End Role="CourseResource" EntitySet="CourseResource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradedHomework_Homework" Association="Self.FK_GradedHomework_Homework">
+      <End Role="Homework" EntitySet="Homework" />
+      <End Role="GradedHomework" EntitySet="GradedHomework" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradedHomework_Student" Association="Self.FK_GradedHomework_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="GradedHomework" EntitySet="GradedHomework" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Homework_Course" Association="Self.FK_Homework_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Homework_CourseChapter" Association="Self.FK_Homework_CourseChapter">
+      <End Role="CourseChapter" EntitySet="CourseChapter" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_Course" Association="Self.FK_News_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentToCourse_Course" Association="Self.FK_StudentToCourse_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="StudentToCourse" EntitySet="StudentToCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentToCourse_Student" Association="Self.FK_StudentToCourse_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentToCourse" EntitySet="StudentToCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentToTest_Student" Association="Self.FK_StudentToTest_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentToTest" EntitySet="StudentToTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentToTest_Test" Association="Self.FK_StudentToTest_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="StudentToTest" EntitySet="StudentToTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Test_Course" Association="Self.FK_Test_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Test_CourseChapter" Association="Self.FK_Test_CourseChapter">
+      <End Role="CourseChapter" EntitySet="CourseChapter" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Thread_Topic" Association="Self.FK_Thread_Topic">
+      <End Role="Topic" EntitySet="Topic" />
+      <End Role="Thread" EntitySet="Thread" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Topic_Course" Association="Self.FK_Topic_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Topic" EntitySet="Topic" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

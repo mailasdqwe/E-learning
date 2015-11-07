@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d132a39563b84584bdec7860dee0adaa" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_ELearningModel.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Assistant" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Comment" Width="1.5" PointX="9.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Course" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.CourseChapter" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.CourseResource" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.GradedHomework" Width="1.5" PointX="12.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Homework" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.News" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Student" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.StudentToTest" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Teacher" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Test" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Thread" Width="1.5" PointX="7.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_ELearningModel.Topic" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Comment_Thread" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Course_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_CourseChapter_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_CourseResource_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Homework_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_News_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Test_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Topic_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_CourseResource_CourseChapter" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Homework_CourseChapter" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Test_CourseChapter" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_GradedHomework_Homework" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_GradedHomework_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_StudentToTest_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_StudentToTest_Test" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.FK_Thread_Topic" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.AssistantToCourse" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_ELearningModel.StudentToCourse" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
