@@ -23,8 +23,8 @@ namespace E_Learning.Controllers
         [HttpGet]
         public ActionResult ManageStudents()
         {
-
-            return View("ViewAllStudents");
+            var students = studentService.GetAllStudents().Select(student => ViewModelFactory.GetStudentViewModelFromStudent(student)).ToList();
+            return View("ViewAllStudents", students);
         }
 
         [HttpGet]
