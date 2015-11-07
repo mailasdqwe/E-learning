@@ -12,10 +12,7 @@ namespace E_Learning.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            var list = new DB_ELearningEntities().Admins;
-            if (list.ToList().Count > 0)
-                return View();
-            else return View();
+            return View();
         }
 
         public ActionResult About()
