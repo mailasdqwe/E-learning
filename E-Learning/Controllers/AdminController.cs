@@ -23,6 +23,7 @@ namespace E_Learning.Controllers
         [HttpGet]
         public ActionResult ManageStudents()
         {
+
             return View("ViewAllStudents");
         }
 
@@ -61,14 +62,12 @@ namespace E_Learning.Controllers
         {
             return View("Empty");
         }
+
         [HttpGet]
         public ActionResult EnterForum()
         {
             return View("Empty");
         }
         
-
-        
-        CreateMail
     }
 }
