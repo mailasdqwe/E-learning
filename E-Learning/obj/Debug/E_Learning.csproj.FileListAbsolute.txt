@@ -244,3 +244,6 @@ C:\Users\Bubuta\Desktop\E-learning\E-Learning\bin\zh-Hant\System.Spatial.resourc
 C:\Users\Bubuta\Desktop\E-learning\E-Learning\obj\Debug\E_Learning.csprojResolveAssemblyReference.cache
 C:\Users\Bubuta\Desktop\E-learning\E-Learning\obj\Debug\E_Learning.dll
 C:\Users\Bubuta\Desktop\E-learning\E-Learning\obj\Debug\E_Learning.pdb
+C:\Users\AlinaPustan\Documents\GitHub\E-learning\E-Learning\obj\Debug\E_Learning.csprojResolveAssemblyReference.cache
+C:\Users\AlinaPustan\Documents\GitHub\E-learning\E-Learning\obj\Debug\E_Learning.dll
+C:\Users\AlinaPustan\Documents\GitHub\E-learning\E-Learning\obj\Debug\E_Learning.pdb

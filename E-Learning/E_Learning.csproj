@@ -198,6 +198,7 @@
     <Compile Include="Repo\Assistant.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repo\AssistantService.cs" />
     <Compile Include="Repo\Comment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
