@@ -40,5 +40,7 @@ namespace E_Learning.Repo
         public DbSet<Test> Tests { get; set; }
         public DbSet<Thread> Threads { get; set; }
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
     }
 }

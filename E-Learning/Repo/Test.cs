@@ -22,9 +22,9 @@ namespace E_Learning.Repo
         public int TestID { get; set; }
         public Nullable<int> CourseID { get; set; }
         public Nullable<int> ChapterNO { get; set; }
-        public string IsMandatory { get; set; }
+        public Nullable<bool> IsMandatory { get; set; }
         public Nullable<System.TimeSpan> AllocatedTime { get; set; }
-        public Nullable<int> NoOfAttempts { get; set; }
+        public Nullable<byte> NoOfAttempts { get; set; }
         public Nullable<System.DateTime> Deadline { get; set; }
         public string Structure { get; set; }
     

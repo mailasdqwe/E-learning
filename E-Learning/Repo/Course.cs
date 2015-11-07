@@ -30,7 +30,7 @@ namespace E_Learning.Repo
         public Nullable<int> TeacherID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string AreChapterSequential { get; set; }
+        public Nullable<bool> AreChapterSequential { get; set; }
     
         public virtual Teacher Teacher { get; set; }
         public virtual ICollection<CourseChapter> CourseChapters { get; set; }

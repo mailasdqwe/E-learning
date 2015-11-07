@@ -24,7 +24,7 @@ namespace E_Learning.Repo
         public Nullable<int> ChapterNO { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string IsMandatory { get; set; }
+        public Nullable<bool> IsMandatory { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual CourseChapter CourseChapter { get; set; }

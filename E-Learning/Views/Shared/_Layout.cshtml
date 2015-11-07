@@ -12,7 +12,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("E-learning App", "Home", "Admin")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -20,9 +20,19 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <!---->
+                            <li>@Html.ActionLink("Gestioneaza studenti", "ManageStudents", "Admin")</li>
+                            <li>@Html.ActionLink("Gestioneaza profesori", "ManageTeachers", "Admin")</li>
+                            <li>@Html.ActionLink("Gestioneaza asistenti", "ManageAssistents", "Admin")</li>
+                            <li>@Html.ActionLink("Gestioneaza administratori", "ManageAdmins", "Admin")</li>
+                            <!---->
+                            <li>@Html.ActionLink("Rapoarte", "ViewReports", "Admin")</li>
+                            <!---->
+                            <li>@Html.ActionLink("Vizualizare log-uri", "ViewLogs", "Admin")</li>
+                            <!---->
+                            <li>@Html.ActionLink("Mail", "CreateMail", "Admin")</li>
+                            <!---->
+                            <li>@Html.ActionLink("Forum", "EnterForum", "Admin")</li>
                         </ul>
                     </nav>
                 </div>

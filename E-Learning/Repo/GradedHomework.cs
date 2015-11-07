@@ -16,7 +16,7 @@ namespace E_Learning.Repo
     {
         public int StudentID { get; set; }
         public int HomeworkID { get; set; }
-        public Nullable<int> Grade { get; set; }
+        public Nullable<byte> Grade { get; set; }
     
         public virtual Homework Homework { get; set; }
         public virtual Student Student { get; set; }

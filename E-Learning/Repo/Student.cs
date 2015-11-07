@@ -25,9 +25,10 @@ namespace E_Learning.Repo
         public Nullable<int> UserID { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        public Nullable<int> CardNO { get; set; }
+        public string CardNO { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Nullable<bool> isBlocked { get; set; }
     
         public virtual ICollection<GradedHomework> GradedHomeworks { get; set; }
         public virtual ICollection<StudentToTest> StudentToTests { get; set; }

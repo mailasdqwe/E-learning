@@ -11,7 +11,7 @@
           </Key>
           <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
-          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Assistant">
           <Key>
@@ -21,7 +21,7 @@
           <Property Name="UserID" Type="int" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" />
-          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AssistantToCourse">
           <Key>
@@ -37,7 +37,7 @@
           </Key>
           <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ThreadID" Type="int" />
-          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -46,8 +46,8 @@
           <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TeacherID" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="AreChapterSequential" Type="nvarchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="AreChapterSequential" Type="bit" />
         </EntityType>
         <EntityType Name="CourseChapter">
           <Key>
@@ -73,7 +73,7 @@
           </Key>
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="HomeworkID" Type="int" Nullable="false" />
-          <Property Name="Grade" Type="int" />
+          <Property Name="Grade" Type="tinyint" />
         </EntityType>
         <EntityType Name="Homework">
           <Key>
@@ -83,8 +83,8 @@
           <Property Name="CourseID" Type="int" />
           <Property Name="ChapterNO" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="IsMandatory" Type="nvarchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="IsMandatory" Type="bit" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -101,11 +101,12 @@
           </Key>
           <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
-          <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="CardNO" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardNO" Type="nvarchar" MaxLength="30" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+          <Property Name="isBlocked" Type="bit" />
         </EntityType>
         <EntityType Name="StudentToCourse">
           <Key>
@@ -122,9 +123,9 @@
           </Key>
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="TestID" Type="int" Nullable="false" />
-          <Property Name="AttemptsRemaining" Type="int" />
-          <Property Name="LastGrade" Type="int" />
-          <Property Name="MaxGrade" Type="int" />
+          <Property Name="AttemptsRemaining" Type="tinyint" />
+          <Property Name="LastGrade" Type="tinyint" />
+          <Property Name="MaxGrade" Type="tinyint" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -134,7 +135,7 @@
           <Property Name="UserID" Type="int" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" />
-          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -143,9 +144,9 @@
           <Property Name="TestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseID" Type="int" />
           <Property Name="ChapterNO" Type="int" />
-          <Property Name="IsMandatory" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsMandatory" Type="bit" />
           <Property Name="AllocatedTime" Type="time" Precision="7" />
-          <Property Name="NoOfAttempts" Type="int" />
+          <Property Name="NoOfAttempts" Type="tinyint" />
           <Property Name="Deadline" Type="date" />
           <Property Name="Structure" Type="nvarchar(max)" />
         </EntityType>
@@ -164,6 +165,21 @@
           </Key>
           <Property Name="TopicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseID" Type="int" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_AssistantToCourse_Assistant">
           <End Role="Assistant" Type="Self.Assistant" Multiplicity="1" />
@@ -309,6 +325,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StudentToCourse_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="StudentToCourse" Type="Self.StudentToCourse" Multiplicity="*" />
@@ -423,6 +451,8 @@
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thread" EntityType="Self.Thread" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AssistantToCourse_Assistant" Association="Self.FK_AssistantToCourse_Assistant">
             <End Role="Assistant" EntitySet="Assistant" />
             <End Role="AssistantToCourse" EntitySet="AssistantToCourse" />
@@ -471,6 +501,10 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_StudentToCourse_Course" Association="Self.FK_StudentToCourse_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="StudentToCourse" EntitySet="StudentToCourse" />
@@ -515,7 +549,7 @@
           </Key>
           <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Assistant">
           <Key>
@@ -525,7 +559,7 @@
           <Property Name="UserID" Type="Int32" />
           <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Courses" Relationship="Self.AssistantToCourse" FromRole="Assistant" ToRole="Course" />
         </EntityType>
         <EntityType Name="Comment">
@@ -534,7 +568,7 @@
           </Key>
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ThreadID" Type="Int32" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Thread" Relationship="Self.FK_Comment_Thread" FromRole="Comment" ToRole="Thread" />
         </EntityType>
         <EntityType Name="Course">
@@ -544,8 +578,8 @@
           <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TeacherID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AreChapterSequential" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="AreChapterSequential" Type="Boolean" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_Course_Teacher" FromRole="Course" ToRole="Teacher" />
           <NavigationProperty Name="CourseChapters" Relationship="Self.FK_CourseChapter_Course" FromRole="Course" ToRole="CourseChapter" />
           <NavigationProperty Name="CourseResources" Relationship="Self.FK_CourseResource_Course" FromRole="Course" ToRole="CourseResource" />
@@ -586,7 +620,7 @@
           </Key>
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="HomeworkID" Type="Int32" Nullable="false" />
-          <Property Name="Grade" Type="Int32" />
+          <Property Name="Grade" Type="Byte" />
           <NavigationProperty Name="Homework" Relationship="Self.FK_GradedHomework_Homework" FromRole="GradedHomework" ToRole="Homework" />
           <NavigationProperty Name="Student" Relationship="Self.FK_GradedHomework_Student" FromRole="GradedHomework" ToRole="Student" />
         </EntityType>
@@ -598,8 +632,8 @@
           <Property Name="CourseID" Type="Int32" />
           <Property Name="ChapterNO" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsMandatory" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IsMandatory" Type="Boolean" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Homework_Course" FromRole="Homework" ToRole="Course" />
           <NavigationProperty Name="CourseChapter" Relationship="Self.FK_Homework_CourseChapter" FromRole="Homework" ToRole="CourseChapter" />
           <NavigationProperty Name="GradedHomeworks" Relationship="Self.FK_GradedHomework_Homework" FromRole="Homework" ToRole="GradedHomework" />
@@ -620,11 +654,12 @@
           </Key>
           <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CardNO" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardNO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="isBlocked" Type="Boolean" />
           <NavigationProperty Name="GradedHomeworks" Relationship="Self.FK_GradedHomework_Student" FromRole="Student" ToRole="GradedHomework" />
           <NavigationProperty Name="StudentToTests" Relationship="Self.FK_StudentToTest_Student" FromRole="Student" ToRole="StudentToTest" />
           <NavigationProperty Name="Courses" Relationship="Self.StudentToCourse" FromRole="Student" ToRole="Course" />
@@ -636,9 +671,9 @@
           </Key>
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="TestID" Type="Int32" Nullable="false" />
-          <Property Name="AttemptsRemaining" Type="Int32" />
-          <Property Name="LastGrade" Type="Int32" />
-          <Property Name="MaxGrade" Type="Int32" />
+          <Property Name="AttemptsRemaining" Type="Byte" />
+          <Property Name="LastGrade" Type="Byte" />
+          <Property Name="MaxGrade" Type="Byte" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentToTest_Student" FromRole="StudentToTest" ToRole="Student" />
           <NavigationProperty Name="Test" Relationship="Self.FK_StudentToTest_Test" FromRole="StudentToTest" ToRole="Test" />
         </EntityType>
@@ -650,7 +685,7 @@
           <Property Name="UserID" Type="Int32" />
           <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Courses" Relationship="Self.FK_Course_Teacher" FromRole="Teacher" ToRole="Course" />
         </EntityType>
         <EntityType Name="Test">
@@ -660,9 +695,9 @@
           <Property Name="TestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CourseID" Type="Int32" />
           <Property Name="ChapterNO" Type="Int32" />
-          <Property Name="IsMandatory" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsMandatory" Type="Boolean" />
           <Property Name="AllocatedTime" Type="Time" Precision="7" />
-          <Property Name="NoOfAttempts" Type="Int32" />
+          <Property Name="NoOfAttempts" Type="Byte" />
           <Property Name="Deadline" Type="DateTime" Precision="0" />
           <Property Name="Structure" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Test_Course" FromRole="Test" ToRole="Course" />
@@ -688,6 +723,23 @@
           <Property Name="CourseID" Type="Int32" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Topic_Course" FromRole="Topic" ToRole="Course" />
           <NavigationProperty Name="Threads" Relationship="Self.FK_Thread_Topic" FromRole="Topic" ToRole="Thread" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="webpages_UsersInRoles" Relationship="Self.fk_RoleId" FromRole="webpages_Roles" ToRole="webpages_UsersInRoles" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Self.fk_RoleId" FromRole="webpages_UsersInRoles" ToRole="webpages_Roles" />
         </EntityType>
         <Association Name="FK_Comment_Thread">
           <End Role="Thread" Type="Self.Thread" Multiplicity="0..1" />
@@ -881,6 +933,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AssistantToCourse">
           <End Role="Assistant" Type="Self.Assistant" Multiplicity="*" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
@@ -905,6 +969,8 @@
           <EntitySet Name="Tests" EntityType="Self.Test" />
           <EntitySet Name="Threads" EntityType="Self.Thread" />
           <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" />
           <AssociationSet Name="FK_Comment_Thread" Association="Self.FK_Comment_Thread">
             <End Role="Thread" EntitySet="Threads" />
             <End Role="Comment" EntitySet="Comments" />
@@ -968,6 +1034,10 @@
           <AssociationSet Name="FK_Thread_Topic" Association="Self.FK_Thread_Topic">
             <End Role="Topic" EntitySet="Topics" />
             <End Role="Thread" EntitySet="Threads" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
           <AssociationSet Name="AssistantToCourse" Association="Self.AssistantToCourse">
             <End Role="Assistant" EntitySet="Assistants" />
@@ -1084,6 +1154,7 @@
                 <ScalarProperty Name="CardNO" ColumnName="CardNO" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="isBlocked" ColumnName="isBlocked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1138,6 +1209,22 @@
               <MappingFragment StoreEntitySet="Topic">
                 <ScalarProperty Name="TopicID" ColumnName="TopicID" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="DB_ELearningModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_UsersInRoles">
+            <EntityTypeMapping TypeName="DB_ELearningModel.webpages_UsersInRoles">
+              <MappingFragment StoreEntitySet="webpages_UsersInRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

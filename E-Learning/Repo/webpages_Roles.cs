@@ -12,15 +12,16 @@ namespace E_Learning.Repo
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentToTest
+    public partial class webpages_Roles
     {
-        public int StudentID { get; set; }
-        public int TestID { get; set; }
-        public Nullable<byte> AttemptsRemaining { get; set; }
-        public Nullable<byte> LastGrade { get; set; }
-        public Nullable<byte> MaxGrade { get; set; }
+        public webpages_Roles()
+        {
+            this.webpages_UsersInRoles = new HashSet<webpages_UsersInRoles>();
+        }
     
-        public virtual Student Student { get; set; }
-        public virtual Test Test { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+    
+        public virtual ICollection<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
     }
 }
